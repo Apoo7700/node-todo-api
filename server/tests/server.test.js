@@ -50,3 +50,15 @@ describe('POST /todo',()=>{
         });
     })
 });
+
+describe('GET /todos',()=>{
+    it('should return all todos',(done)=>{
+        request(app).get('/todos')
+        .expect(200)
+        .expect((response)=>{
+            
+            expect(response.body.length).toNotBe(0);
+        })
+        .end(done);
+    });
+});
