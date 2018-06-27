@@ -2,6 +2,7 @@ const express=require('express');
 //takes json and convert it to an object
 const bodyParser=require('body-parser');
 
+var {ObjectId}=require('mongodb');
 var {mongoose}=require('./db/mongoose');
 var Todo=require('./models/Todo');
 var TodoUser =require('./models/todoUser');
@@ -19,6 +20,21 @@ app.post('/todos',(request, response)=>{
    },(err)=>{
        response.status(500).send(err);
    });
+});
+
+app.get('/todos/:id',(req,res)=>{
+    var id=req.params.id;
+    if(!ObjectId.isValid(id)){
+        return  res.status(404).send();
+    }
+    Todo.findById(id).then((result)=>{
+        if(!result){
+            return res.status(404).send();
+        }
+        res.send(result);
+    }).catch((e)=>{
+        res.status(400).send();
+    });
 });
 
 app.get('/todos',(request,response)=>{
