@@ -11,12 +11,12 @@ var file1=new file({
 
 var user=require('../models/health/User');
 var user1=new user({
-    userName:'apoorva',
-    userEmail:'apoo7700@abc.com'
+    userName:'rachit',
+    userEmail:'rachit@abc.com'
 });
 var user2=new user({
-    userName:'apoo',
-    userEmail:'apoorsharma@abc.com'
+    userName:'abhishek',
+    userEmail:'abhishek@abc.com'
 });
 
 var comment=require('../models/health/Comment');
@@ -30,14 +30,14 @@ var comment2=new comment({
 });
 
 var video1 = new video({
-      title: 'video title',
-      description:'video description',
+      title: 'video2 title',
+      description:'video2 description',
       file:file1,  
       user:user1,
       status:'Pending',    
       likes: ['apoo7700','apoorsharma'],
       tags: [user1,user2],
-      comments:[comment1,comment2]
+      comments:[]
 });
 
 video1.save().then((doc)=>{
