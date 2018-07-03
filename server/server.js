@@ -5,7 +5,7 @@ const bodyParser=require('body-parser');
 var {ObjectId}=require('mongodb');
 var {mongoose}=require('./db/mongoose');
 var Todo=require('./models/Todo');
-var TodoUser =require('./models/todoUser');
+var TodoUser =require('./models/TodoUser');
 
 var app=express();
 //adding middleware
