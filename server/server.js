@@ -1,4 +1,5 @@
 const express=require('express');
+const _=require('lodash');
 //takes json and convert it to an object
 const bodyParser=require('body-parser');
 
@@ -31,6 +32,32 @@ app.delete('/todos/:id',(req,res)=>{
     }
 
     Todo.findByIdAndRemove(id).then((result)=>{
+        if(!result){
+            return res.status(404).send();
+        }
+        res.send(result);
+    }).catch((e)=>{
+        res.status(400).send();
+    });
+});
+
+app.patch('/todos/:id',(req,res)=>{
+    var id=req.params.id;
+    //lets u pick only required properties from an object
+    //has subset of user request
+    var body=_.pick(req.body,['text','completed']);
+    if(!ObjectId.isValid(id)){
+        return  res.status(404).send();
+    }
+
+    if(_.isBoolean(body.completed) && body.completed){
+        body.completedAt= new Date().getTime();
+    }else{
+        body.completed=false;
+        body.completedAt=null;
+    }
+
+    Todo.findByIdAndUpdate(id,{$set:body},{new:true}).then((result)=>{
         if(!result){
             return res.status(404).send();
         }
