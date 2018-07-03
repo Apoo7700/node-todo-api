@@ -10,6 +10,7 @@ var TodoUser =require('./models/todoUser');
 var app=express();
 //adding middleware
 app.use(bodyParser.json());
+var port=process.env.PORT || 3000;
 
 app.post('/todos',(request, response)=>{
    var todoEntry=new Todo({
@@ -45,8 +46,8 @@ app.get('/todos',(request,response)=>{
     });
 });
 
-app.listen(3000,()=>{
-    console.log('started on port 3000');
+app.listen(port,()=>{
+    console.log(`started on port ${port}`);
 });
 
 module.exports={app};
