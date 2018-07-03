@@ -1,3 +1,5 @@
+require('./config/config');
+
 const express=require('express');
 const _=require('lodash');
 //takes json and convert it to an object
@@ -11,7 +13,7 @@ var TodoUser =require('./models/TodoUser');
 var app=express();
 //adding middleware
 app.use(bodyParser.json());
-var port=process.env.PORT || 3000;
+var port=process.env.PORT;
 
 app.post('/todos',(request, response)=>{
    var todoEntry=new Todo({
